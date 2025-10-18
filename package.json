@@ -1,31 +1,42 @@
 {
-  "name": "@your-org/tz-guard",
+  "name": "@thanhtuanxzx/tz-guard",
   "version": "0.1.0",
   "description": "A tiny, sharp TypeScript toolkit to avoid timezone mistakes",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": ["dist"],
+  "sideEffects": false,
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "prepare": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": [
-    "timezone",
-    "dst",
-    "luxon",
-    "typescript",
-    "utc",
-    "iana"
-  ],
-  "author": "Your Name",
+  "keywords": ["timezone", "dst", "luxon", "typescript", "utc", "iana"],
+  "author": "Thanh Tuan",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thanhtuanxzx/tz-guard.git"
+  },
+  "homepage": "https://github.com/thanhtuanxzx/tz-guard#readme",
+  "bugs": {
+    "url": "https://github.com/thanhtuanxzx/tz-guard/issues"
+  },
   "peerDependencies": {
     "luxon": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "luxon": { "optional": false }
   },
   "devDependencies": {
     "@types/luxon": "^3.7.1",
@@ -38,5 +49,8 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

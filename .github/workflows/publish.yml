@@ -1,4 +1,5 @@
-name: publish
+name: Publish tz-guard
+
 on:
   push:
     tags:
@@ -16,9 +17,9 @@ jobs:
         with:
           node-version: 20
           registry-url: https://npm.pkg.github.com
-          scope: "@your-org"
+          scope: "@thanhtuanxzx"
       - run: npm ci
       - run: npm run build
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
