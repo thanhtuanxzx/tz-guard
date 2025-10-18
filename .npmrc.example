@@ -5,8 +5,8 @@
 @thanhtuanxzx:registry=https://npm.pkg.github.com
 
 # Authentication token for publishing
-# You can use either NPM_TOKEN or GITHUB_TOKEN
-//npm.pkg.github.com/:_authToken=${NPM_TOKEN}
+# You can use either NODE_AUTH_TOKEN or GITHUB_TOKEN
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 
 # Alternative: Use GitHub token directly
 # //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}

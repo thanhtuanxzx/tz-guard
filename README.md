@@ -77,13 +77,13 @@ const view = formatZoned(utc, "America/New_York", "yyyy-LL-dd HH:mm ZZZZ");
 ### Prerequisites
 
 1. **npm Account** with publish permissions
-2. **NPM_TOKEN** secret configured in GitHub repository
+2. **NODE_AUTH_TOKEN** secret configured in GitHub repository
 
 ### Publish to npmjs.org
 
 ```bash
 # Set your npm token
-export NPM_TOKEN=your_npm_token_here
+export NODE_AUTH_TOKEN=your_NODE_AUTH_TOKEN_here
 
 # Build and publish
 npm run build
@@ -100,7 +100,7 @@ git tag v0.1.4
 git push origin v0.1.4
 ```
 
-**Note**: You need to configure `NPM_TOKEN` secret in your GitHub repository settings.
+**Note**: You need to configure `NODE_AUTH_TOKEN` secret in your GitHub repository settings.
 
 ## Development
 

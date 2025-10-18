@@ -7,7 +7,7 @@
 ```ini
 # GitHub Packages Registry Configuration
 @thanhtuanxzx:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${NPM_TOKEN}
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 ```
 
 ### 2. File .npmrc cho Users (Installing)
@@ -43,7 +43,7 @@
 
 ```bash
 # 1. Set environment variable
-export NPM_TOKEN=ghp_your_token_here
+export NODE_AUTH_TOKEN=ghp_your_token_here
 
 # 2. Build package
 npm run build
