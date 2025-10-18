@@ -2,21 +2,43 @@ name: Publish tz-guard to npmjs.org
 
 on:
   push:
-    tags: ["v*"]
+    tags: ["v*"]   # chạy khi push tag v0.1.4, v1.0.0, ...
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node (npmjs.org)
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://registry.npmjs.org
-      - run: npm ci
-      - run: npm run build
-      - run: npm publish
+          registry-url: https://registry.npmjs.org/
+
+      # BẮT BUỘC: ép dùng npmjs.org, tránh .npmrc cũ trỏ GitHub Packages
+      - name: Force npm registry to npmjs.org
+        run: |
+          rm -f ~/.npmrc .npmrc
+          echo "registry=https://registry.npmjs.org/" > .npmrc
+
+      # (Tuỳ chọn, giúp debug token)
+      - name: Verify npm auth
+        run: npm whoami --registry=https://registry.npmjs.org/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Publish to npmjs.org
+        run: npm publish --access public --registry=https://registry.npmjs.org/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

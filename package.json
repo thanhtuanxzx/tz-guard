@@ -13,9 +13,7 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "sideEffects": false,
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -23,14 +21,7 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": [
-    "timezone",
-    "dst",
-    "luxon",
-    "typescript",
-    "utc",
-    "iana"
-  ],
+  "keywords": ["timezone", "dst", "luxon", "typescript", "utc", "iana"],
   "author": "Thanh Tuan",
   "license": "MIT",
   "repository": {
@@ -38,16 +29,12 @@
     "url": "git+https://github.com/thanhtuanxzx/tz-guard.git"
   },
   "homepage": "https://github.com/thanhtuanxzx/tz-guard#readme",
-  "bugs": {
-    "url": "https://github.com/thanhtuanxzx/tz-guard/issues"
-  },
+  "bugs": { "url": "https://github.com/thanhtuanxzx/tz-guard/issues" },
   "peerDependencies": {
     "luxon": "^3.0.0"
   },
   "peerDependenciesMeta": {
-    "luxon": {
-      "optional": false
-    }
+    "luxon": { "optional": false }
   },
   "devDependencies": {
     "@types/luxon": "^3.7.1",
@@ -59,9 +46,8 @@
     "ts-jest": "^29.0.0"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
-  "engines": {
-    "node": ">=18"
-  }
+  "engines": { "node": ">=18" }
 }
