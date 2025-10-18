@@ -1,0 +1,42 @@
+{
+  "name": "@your-org/tz-guard",
+  "version": "0.1.0",
+  "description": "A tiny, sharp TypeScript toolkit to avoid timezone mistakes",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "timezone",
+    "dst",
+    "luxon",
+    "typescript",
+    "utc",
+    "iana"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "peerDependencies": {
+    "luxon": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.7.1",
+    "@types/node": "^20.0.0",
+    "luxon": "^3.0.0",
+    "typescript": "^5.6.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "ts-jest": "^29.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
