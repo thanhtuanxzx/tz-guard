@@ -1,6 +1,6 @@
 {
   "name": "@thanhtuanxzx/tz-guard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A tiny, sharp TypeScript toolkit to avoid timezone mistakes",
   "type": "module",
   "main": "dist/index.cjs",
@@ -13,7 +13,9 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -21,7 +23,14 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": ["timezone", "dst", "luxon", "typescript", "utc", "iana"],
+  "keywords": [
+    "timezone",
+    "dst",
+    "luxon",
+    "typescript",
+    "utc",
+    "iana"
+  ],
   "author": "Thanh Tuan",
   "license": "MIT",
   "repository": {
@@ -36,7 +45,9 @@
     "luxon": "^3.0.0"
   },
   "peerDependenciesMeta": {
-    "luxon": { "optional": false }
+    "luxon": {
+      "optional": false
+    }
   },
   "devDependencies": {
     "@types/luxon": "^3.7.1",
