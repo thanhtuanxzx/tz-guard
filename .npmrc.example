@@ -1,0 +1,19 @@
+# GitHub Packages Registry Configuration Example
+# Copy this file to .npmrc and configure your tokens
+
+# For publishing packages (replace with your GitHub username/organization)
+@thanhtuanxzx:registry=https://npm.pkg.github.com
+
+# Authentication token for publishing
+# You can use either NPM_TOKEN or GITHUB_TOKEN
+//npm.pkg.github.com/:_authToken=${NPM_TOKEN}
+
+# Alternative: Use GitHub token directly
+# //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+
+# For installing packages, users need to add:
+# @thanhtuanxzx:registry=https://npm.pkg.github.com
+# //npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+
+# Optional: Set default registry for all scoped packages
+# registry=https://npm.pkg.github.com

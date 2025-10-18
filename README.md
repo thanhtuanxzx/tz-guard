@@ -15,10 +15,33 @@ A tiny, sharp TypeScript toolkit to avoid timezone mistakes.
 
 ## Install
 
+### From GitHub Packages
+
 ```bash
-npm i luxon
-# If you publish this package, add luxon as a peerDependency
+# Install the package
+npm install @thanhtuanxzx/tz-guard
+
+# Install peer dependency
+npm install luxon
 ```
+
+### Configure .npmrc for GitHub Packages
+
+Create a `.npmrc` file in your project root:
+
+```ini
+@thanhtuanxzx:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+Or add to your global `.npmrc`:
+
+```bash
+echo "@thanhtuanxzx:registry=https://npm.pkg.github.com" >> ~/.npmrc
+echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> ~/.npmrc
+```
+
+**Note**: You need a GitHub Personal Access Token with `read:packages` permission to install packages from GitHub Packages.
 
 ## Quick Start
 
@@ -64,6 +87,37 @@ const view = formatZoned(utc, "America/New_York", "yyyy-LL-dd HH:mm ZZZZ");
 - **Non-existent times (spring forward)**: some local clock times never occur
 - **Ambiguous times (fall back)**: a local time happens twice; you must choose earlier/later offset
 - Always validate user-entered local times before converting & persisting
+
+## Publishing
+
+### Prerequisites
+
+1. **GitHub Personal Access Token** with `write:packages` permission
+2. **Configure .npmrc** (see `.npmrc.example` file)
+
+### Publish to GitHub Packages
+
+```bash
+# Set your GitHub token
+export NPM_TOKEN=your_github_token_here
+
+# Or use GitHub token directly
+export GITHUB_TOKEN=your_github_token_here
+
+# Build and publish
+npm run build
+npm publish
+```
+
+### Automated Publishing
+
+The package includes GitHub Actions workflow (`.github/workflows/publish.yml`) that automatically publishes when you create a git tag:
+
+```bash
+# Create and push a tag to trigger publishing
+git tag v0.1.1
+git push origin v0.1.1
+```
 
 ## Development
 
