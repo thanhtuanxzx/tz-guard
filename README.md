@@ -1,33 +1,48 @@
-# tz-guard
+# 🕒 tz-guard
 
-A tiny, sharp TypeScript toolkit to avoid timezone mistakes.
+> A tiny, sharp TypeScript toolkit to avoid timezone mistakes — built on [Luxon](https://moment.github.io/luxon/).
 
-## Goals
+---
 
-- Treat UTC as the source of truth for storage & comparison
-- Convert to/from IANA zones safely, detecting DST gaps & overlaps
-- Provide helpers for: parsing local wall-times, choosing an offset in ambiguous moments, normalizing time ranges, recurring scheduling, and business-hours checks
+## 🚀 Features
 
-## Tech
+✅ Safe timezone handling with [IANA zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+✅ Detects DST gaps & overlaps (e.g., spring-forward, fall-back)
+✅ Provides helpers for:
 
-- Runtime: Node.js 18+ or modern browsers
-- Libs: luxon@^3 (IANA timezones) — small, robust, tree-shakeable
+* Local & UTC conversions
+* DST ambiguity resolution
+* Normalizing time ranges
+* Recurrence scheduling
+* Business hour checks
 
-## Install
+---
 
-### From npmjs.org (Public Registry)
+## ⚙️ Installation
+
+### From **npmjs.org**
 
 ```bash
-# Install the package
-npm install @thanhtuanxzx/tz-guard
-
-# Install peer dependency
-npm install luxon
+npm install tz-guard
 ```
 
-**No additional configuration needed!** Package is available on the public npm registry.
 
-## Quick Start
+### From **GitHub Packages** (optional)
+
+If you want to install directly from GitHub Packages:
+
+```bash
+# ~/.npmrc
+@thanhtuanxzx:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+
+# then
+npm install @thanhtuanxzx/tz-guard
+```
+
+---
+
+## 🧠 Quick Start
 
 ```ts
 import {
@@ -43,66 +58,69 @@ const utc = toUTCFromLocal("2025-10-18T09:00:00", "Asia/Ho_Chi_Minh");
 const view = formatZoned(utc, "America/New_York", "yyyy-LL-dd HH:mm ZZZZ");
 ```
 
-## API Reference
+---
 
-### Zone Validation
-- `assertZone(zone: string)`: Kiểm tra zone hợp lệ (IANA), ném lỗi nếu sai
+## 📘 API Overview
 
-### Parsing & Conversion
-- `parseLocal(localISO: string, zone: string): DateTime` - Parse local wall-time theo zone
-- `toUTCFromLocal(localISO: string, zone: string, opts?: { onAmbiguous?: 'earlier'|'later' }): Date` - Chuyển local → UTC
-- `convertZone(instant: Date|string|number, zone: string): DateTime` - Chuyển UTC instant sang DateTime theo zone
+### 🏷 Zone Validation
 
-### DST Detection
-- `isInvalidLocalTime(localISO: string, zone: string): boolean` - Phát hiện giờ không tồn tại do DST
-- `isAmbiguousLocalTime(localISO: string, zone: string): boolean` - Phát hiện giờ bị trùng
-- `chooseOffset(localISO: string, zone: string, pref?: 'earlier'|'later'): DateTime` - Chốt mapping khi mơ hồ
-
-### Range & Scheduling
-- `rangeToUTC(startLocalISO: string, endLocalISO: string, zone: string, opts?: { ambiguous?: 'earlier'|'later' }): { startUTC: string; endUTC: string; interval: Interval }` - Chuẩn hoá khoảng thời gian
-- `nextOccurrence(fromUTC: Date|string|number, zone: string, rule: Recurrence): Date` - Tính lần xảy ra kế tiếp
-
-### Business Logic
-- `isWithinBusinessHours(instantUTC: Date|string|number, zone: string, bh: BusinessHours): boolean` - Kiểm tra giờ làm việc
-- `formatZoned(instantUTC: Date|string|number, zone: string, fmt?: string): string` - Định dạng hiển thị theo zone
-
-## DST Edge Cases
-
-- **Non-existent times (spring forward)**: some local clock times never occur
-- **Ambiguous times (fall back)**: a local time happens twice; you must choose earlier/later offset
-- Always validate user-entered local times before converting & persisting
-
-## Publishing
-
-### Prerequisites
-
-1. **npm Account** with publish permissions
-2. **NODE_AUTH_TOKEN** secret configured in GitHub repository
-
-### Publish to npmjs.org
-
-```bash
-# Set your npm token
-export NODE_AUTH_TOKEN=your_NODE_AUTH_TOKEN_here
-
-# Build and publish
-npm run build
-npm publish
+```ts
+assertZone(zone: string): void
 ```
 
-### Automated Publishing
+Throws error if invalid IANA timezone.
 
-The package includes GitHub Actions workflow (`.github/workflows/publish.yml`) that automatically publishes to npmjs.org when you create a git tag:
+---
 
-```bash
-# Create and push a tag to trigger publishing
-git tag v0.1.4
-git push origin v0.1.4
+### 📅 Parsing & Conversion
+
+```ts
+parseLocal(localISO: string, zone: string): DateTime
+toUTCFromLocal(localISO: string, zone: string, opts?): Date
+convertZone(instant: Date|string|number, zone: string): DateTime
 ```
 
-**Note**: You need to configure `NODE_AUTH_TOKEN` secret in your GitHub repository settings.
+---
 
-## Development
+### 🌐 DST Detection
+
+```ts
+isInvalidLocalTime(localISO: string, zone: string): boolean
+isAmbiguousLocalTime(localISO: string, zone: string): boolean
+chooseOffset(localISO: string, zone: string, pref?: 'earlier'|'later'): DateTime
+```
+
+---
+
+### ⏱ Range & Scheduling
+
+```ts
+rangeToUTC(startLocal: string, endLocal: string, zone: string)
+nextOccurrence(fromUTC: Date|string|number, zone: string, rule: Recurrence)
+```
+
+---
+
+### 💼 Business Logic
+
+```ts
+isWithinBusinessHours(instantUTC: Date|string|number, zone: string, bh: BusinessHours): boolean
+formatZoned(instantUTC: Date|string|number, zone: string, fmt?: string): string
+```
+
+---
+
+## ⚡ DST Edge Cases
+
+| Case           | Description                               |
+| -------------- | ----------------------------------------- |
+| Spring forward | Some local times never occur              |
+| Fall back      | A local time happens twice                |
+| Tip            | Always validate local times before saving |
+
+---
+
+## 🧩 Development
 
 ```bash
 npm install
@@ -110,6 +128,40 @@ npm run build
 npm test
 ```
 
-## License
+Run tests (Jest + ts-jest ESM):
 
-MIT
+```bash
+npm run test
+```
+
+---
+
+## 🚢 Publishing
+
+### Manual (CLI)
+
+```bash
+export NODE_AUTH_TOKEN=your_npm_token
+npm run build
+npm publish --access public
+```
+
+### Automated (GitHub Actions)
+
+Publishing triggers automatically when you push a tag:
+
+```bash
+npm version patch
+git push && git push --tags
+```
+
+The workflow file `.github/workflows/publish.yml` will:
+
+* Publish to **npmjs.org**
+* Publish to **GitHub Packages** (for visibility under your profile)
+
+---
+
+## 📄 License
+
+MIT © [Thanh Tuan](https://github.com/thanhtuanxzx)
